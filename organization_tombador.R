@@ -56,7 +56,14 @@ teste <- tombador_mod %>%
   "serjania trichomisca" = "Serjania trichomisca",
   "vellozia squamata" = "Vellozia squamata",
   "veludo grande" = "Veludo grande",
-  "Verbenacea pegajosa" = "Verbenaceae pegajosa"))
+  "Verbenacea pegajosa" = "Verbenaceae pegajosa",
+  "Folha alterna espiralada tricomafolha/caule" = 
+    "Folha alterna espiralada tricoma"))
+
+teste <- teste %>%
+  dplyr::mutate(species = recode(species,
+  "Folha oposta cruzada pouco tricoma" = "Folha oposta cruzada tricoma",
+   "FVL" = "folha verde larga"))
 
 teste1 <- teste %>%
 dplyr::filter(species != "Agrião roseta" &
@@ -91,4 +98,18 @@ dplyr::filter(species != "Agrião roseta" &
               species != "Ruellia/myrcia" &
               species != "Serreada com tricomas nervura central" &
               species != "Serreada discolor" & 
-              species != "Toni roxo sem cheiro")
+              species != "Toni roxo sem cheiro" &
+              species != "junta achatada")
+
+teste2 <- teste1 %>%
+  dplyr::mutate(treatment = recode(treatment,
+      "control" = "FE",
+      "annual" = "AF",
+      "modal" = "BF"))
+
+teste3 <- teste2 %>%
+  dplyr::filter(plot != 14)
+
+unique(teste3$plot)
+
+write.csv2(teste3, file = "tombador_atualizado.csv", sep = "\t", row.names = T)
