@@ -99,7 +99,25 @@ dplyr::filter(species != "Agrião roseta" &
               species != "Serreada com tricomas nervura central" &
               species != "Serreada discolor" & 
               species != "Toni roxo sem cheiro" &
-              species != "junta achatada")
+              species != "junta achatada" &
+              species != "Poaceae sp1" &
+              species != "hortelã discolor" &
+              species != "Espadinha croton" &
+              species != "Myrcia peciolo gordo" &
+              species != "Falsa ouratea" &
+              species != "Asteraceae branca" &
+              species != "folha comprida" &
+              species != "Oposta cruzada peluda" &
+              species != "Mimosa" &
+              species != "Herbacea serreada dura" &
+              species != "Cruzada, super peluda/pontuda" &
+              species != "Arbusto folha larga composta coriaceae" &
+              species != "Rullia/myrcia" &
+              species != "Herbacea nervura central marcada" &
+              species != "Herbacea coraçao" &
+              species != "Grama braquiária" &
+              species != "Arbusto discolor" &
+              species != "arbusto discolor alterna")
 
 teste2 <- teste1 %>%
   dplyr::mutate(treatment = recode(treatment,
@@ -110,6 +128,5 @@ teste2 <- teste1 %>%
 teste3 <- teste2 %>%
   dplyr::filter(plot != 14)
 
-unique(teste3$plot)
 
 write.csv2(teste3, file = "tombador_atualizado.csv", sep = "\t", row.names = T)
