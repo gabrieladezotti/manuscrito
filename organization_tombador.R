@@ -1,5 +1,5 @@
 #MANUSCRITO - 2021 - base_data
-#organizaÁ„o de dados
+#organiza√ß√£o de dados
 library(tidyverse)
 
 setwd("C:/R/manuscrito")
@@ -23,9 +23,7 @@ tombador_mod <- tombador_base %>%
                 species != "solo nu (formigueiro invadindo)") %>%
   dplyr::filter(cover != 0 & 
                 cover != "" &
-                cover != "herb. fina oposta cruzada")
-
-teste <- tombador_mod %>%
+                cover != "herb. fina oposta cruzada") %>%
   dplyr::mutate(species = recode(species,
   " Anthaenantia lanata" = "Anthaenantia lanata",
   "aldama grandiflora" = "Aldama grandiflora",
@@ -37,7 +35,7 @@ teste <- tombador_mod %>%
   "folha oposta cruzada pouco tricoma" = "Folha oposta cruzada pouco tricoma",
   "herbacea alterna " = "Herbacea alterna",
   "herbacea alterna" = "Herbacea alterna",
-  "lim„ozinho" = "Lim„ozinho",
+  "lim?ozinho" = "Lim?ozinho",
   "lingua brilhante" = "Lingua brilhante",
   "merremia ericoides" = "Merremia ericoides",
   "mesosetum loliiforme" = "Mesosetum loliiforme",
@@ -56,27 +54,18 @@ teste <- tombador_mod %>%
   "serjania trichomisca" = "Serjania trichomisca",
   "vellozia squamata" = "Vellozia squamata",
   "veludo grande" = "Veludo grande",
-  "Verbenacea pegajosa" = "Verbenaceae pegajosa",
-  "Folha alterna espiralada tricomafolha/caule" = 
-    "Folha alterna espiralada tricoma"))
-
-teste <- teste %>%
-  dplyr::mutate(species = recode(species,
-  "Folha oposta cruzada pouco tricoma" = "Folha oposta cruzada tricoma",
-   "FVL" = "folha verde larga"))
-
-teste1 <- teste %>%
-dplyr::filter(species != "Agri„o roseta" &
+  "Verbenacea pegajosa" = "Verbenaceae pegajosa")) %>%
+dplyr::filter(species != "Agri√£o roseta" &
               species != "Alterna cruzada" &
               species != "Alterna oposta" &
-              species != "Arbust„o" &
+              species != "Arbust√£o" &
               species != "arbustao com latex" &
-              species != "Arbust„o peludo" & 
+              species != "Arbust√£o peludo" & 
               species != "Arbusto 04" &
               species != "Arbusto 05" &
               species != "Arbusto 3 folhas" &
               species != "arbusto folha alterna lisa" &
-              species != "Arbusto oposto alterno com estÌpulas" &
+              species != "Arbusto oposto alterno com est√≠pulas" &
               species != "Asteraceae" &
               species != "Asteraceae alterna folha lisa" &
               species != "Borda serreada e caule peludo" & 
@@ -98,35 +87,14 @@ dplyr::filter(species != "Agri„o roseta" &
               species != "Ruellia/myrcia" &
               species != "Serreada com tricomas nervura central" &
               species != "Serreada discolor" & 
-              species != "Toni roxo sem cheiro" &
-              species != "junta achatada" &
-              species != "Poaceae sp1" &
-              species != "hortel„ discolor" &
-              species != "Espadinha croton" &
-              species != "Myrcia peciolo gordo" &
-              species != "Falsa ouratea" &
-              species != "Asteraceae branca" &
-              species != "folha comprida" &
-              species != "Oposta cruzada peluda" &
-              species != "Mimosa" &
-              species != "Herbacea serreada dura" &
-              species != "Cruzada, super peluda/pontuda" &
-              species != "Arbusto folha larga composta coriaceae" &
-              species != "Rullia/myrcia" &
-              species != "Herbacea nervura central marcada" &
-              species != "Herbacea coraÁao" &
-              species != "Grama braqui·ria" &
-              species != "Arbusto discolor" &
-              species != "arbusto discolor alterna")
+              species != "Toni roxo sem cheiro")
 
-teste2 <- teste1 %>%
-  dplyr::mutate(treatment = recode(treatment,
-      "control" = "FE",
-      "annual" = "AF",
-      "modal" = "BF"))
+tombador_mod$species <- droplevels(tombador_mod$species)
 
-teste3 <- teste2 %>%
+unique(tombador_mod$species[order(tombador_mod$species, decreasing = T)])
+# com exclus√µes feitas temos, ao todo, 201 esp√©cies;
+
+teste <- tombador_mod %>%
   dplyr::filter(plot != 14)
 
-
-write.csv2(teste3, file = "tombador_atualizado.csv", sep = "\t", row.names = T)
+unique(teste$plot)
